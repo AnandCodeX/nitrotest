@@ -14,7 +14,7 @@ const reducer = (state, action) => {
       return { ...state, groupingType: action.payload };
     case EDIT_POST:
       console.log('action.payload', action.payload);
-      const editedPosts = state.posts.find((post) =>
+      const editedPosts = state.posts.map((post) =>
         post.id === action.payload.id ? { ...post, ...action.payload } : post,
       );
       return { ...state, posts: editedPosts };
