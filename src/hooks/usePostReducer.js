@@ -15,9 +15,14 @@ const reducer = (state, action) => {
     case EDIT_POST:
       console.log('action.payload', action.payload);
       const editedPosts = state.posts.map((post) =>
-        post.id === action.payload.id ? { ...post, ...action.payload } : post,
+        String(post.id) === action.payload.id
+          ? { ...post, ...action.payload }
+          : post,
       );
-      return { ...state, posts: editedPosts };
+      const data = { ...state, posts: editedPosts };
+      console.log('new data after edit post ', data);
+      return data;
+
     default:
       return state;
   }
