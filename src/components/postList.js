@@ -7,7 +7,7 @@ const PostList = ({ groupedPosts, onEditPost }) => {
         <div key={group}>
           <h2>{group}</h2>
           <ul>
-            {postsInGroup.map(post => (
+            {postsInGroup.map((post) => (
               <PostListItem key={post.id} post={post} onEditPost={onEditPost} />
             ))}
           </ul>
