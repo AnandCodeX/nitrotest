@@ -1,7 +1,10 @@
 /** @format */
 
 import { useReducer } from "react";
-import { SET_POSTS, SET_GROUPING_TYPE, EDIT_POST } from "./types";
+
+const SET_POSTS = "SET_POSTS";
+const SET_GROUPING_TYPE = "SET_GROUPING_TYPE";
+const EDIT_POST = "EDIT_POST";
 
 const reducer = (state, action) => {
 	switch (action.type) {

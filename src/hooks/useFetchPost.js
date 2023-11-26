@@ -1,16 +1,19 @@
-import { useState, useEffect } from 'react';
-import axios from 'axios';
+/** @format */
+
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 
 const useFetchPosts = () => {
-  const [posts, setPosts] = useState([]);
+	const [posts, setPosts] = useState([]);
 
-  useEffect(() => {
-    axios.get('http://localhost:3007/posts')
-      .then(response => setPosts(response.data))
-      .catch(error => console.error('Error fetching data:', error));
-  }, []);
+	useEffect(() => {
+		axios
+			.get("http://localhost:3007/posts")
+			.then((response) => setPosts(response.data))
+			.catch((error) => console.error("Error fetching data:", error));
+	}, []);
 
-  return posts;
+	return posts;
 };
 
 export default useFetchPosts;
