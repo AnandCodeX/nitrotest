@@ -43,7 +43,7 @@ const Posts = () => {
 
 	const handleEditPost = (postId, editedFields) => {
 		dispatch({ type: "EDIT_POST", payload: { id: postId, editedFields } });
-		console.log(postId);
+		
 	};
 
 	return (

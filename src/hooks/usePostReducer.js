@@ -2,7 +2,7 @@
 
 import { useReducer } from "react";
 import { SET_POSTS, SET_GROUPING_TYPE, EDIT_POST } from "./types";
-// Reducer function
+
 const reducer = (state, action) => {
 	switch (action.type) {
 		case SET_POSTS:

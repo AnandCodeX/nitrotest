@@ -17,7 +17,8 @@ const PostListItem = ({ post, onEditPost }) => {
 		setEditedFields({ ...editedFields, [e.target.name]: e.target.value });
 	};
 
-	const handleSaveChanges = () => {
+	const handleSaveChanges = (e) => {
+		e.preventDefault();
 		onEditPost(post.id, editedFields);
 		setIsEditing(false);
 	};
@@ -29,7 +30,7 @@ const PostListItem = ({ post, onEditPost }) => {
 			<p>Location: {post.location}</p>
 
 			{isEditing ? (
-				<div>
+				<form onSubmit={handleSaveChanges}>
 					<label>
 						Location:
 						<input
@@ -50,9 +51,9 @@ const PostListItem = ({ post, onEditPost }) => {
 							required
 						/>
 					</label>
-					<button onClick={handleSaveChanges}>Save Changes</button>
+					<button>Save Changes</button>
 					<button onClick={handleEditToggle}>Cancel</button>
-				</div>
+				</form>
 			) : (
 				<button onClick={handleEditToggle}>Edit Post</button>
 			)}
