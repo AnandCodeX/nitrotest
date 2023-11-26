@@ -1,11 +1,18 @@
 import React, { useState } from 'react';
-const EditPost = ({ postId, initialData, onSaveChanges, onCancel }) => {
-  const [editedFields, setEditedFields] = useState({ location: initialData.location, author: initialData.author });
+import { useNavigate } from 'react-router-dom';
+
+const EditPost = ({ initialData, onSaveChanges, onCancel }) => {
+  const navigate = useNavigate();
+  const [editedFields, setEditedFields] = useState({
+    location: initialData.location,
+    author: initialData.author,
+  });
   const handleFieldChange = (e) => {
-    setEditedFields({ ...editedFields, [e.target.name]: e.target.value });
+    setEditedFields((x) => ({ ...x, [e?.target?.name]: e?.target?.value }));
   };
   const handleSaveChanges = () => {
-    onSaveChanges(postId, editedFields);
+    onSaveChanges(editedFields);
+    navigate('/');
   };
 
   return (

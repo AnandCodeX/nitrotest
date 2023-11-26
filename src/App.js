@@ -1,14 +1,15 @@
 import React, { useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Link, Route, BrowserRouter as Router, Routes } from 'react-router-dom';
+
+import EditPostContainer from './components/EditPostContainer';
 import PostList from './components/PostList';
 import useFetchPosts from './hooks/useFetchPost';
 import usePostsReducer from './hooks/usePostReducer';
-import EditPostContainer from './components/EditPostContainer';
 
 const App = () => {
   const posts = useFetchPosts();
   const [state, dispatch] = usePostsReducer();
-
+console.log('sat')
   useEffect(() => {
     dispatch({ type: 'SET_POSTS', payload: posts });
   }, [dispatch, posts]);
@@ -40,13 +41,15 @@ const App = () => {
   };
 
   const handleEditPost = (postId, editedFields) => {
-    dispatch({ type: 'EDIT_POST', payload: { id: postId, editedFields } });
+    dispatch({ type: 'EDIT_POST', payload: { id: postId, ...editedFields } });
   };
 
   return (
     <Router>
       <div>
-        <h1>Post Tree View</h1>
+        <h1>
+          <Link to="/">Post Tree View</Link>
+        </h1>
         <select value={state.groupingType} onChange={handleGroupingTypeChange}>
           <option value="week">Group by Week</option>
           <option value="author">Group by Author</option>

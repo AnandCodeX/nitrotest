@@ -1,8 +1,8 @@
 /** @format */
 import React from 'react';
-import EditPost from './EditPost';
 import { useNavigate } from 'react-router-dom';
-import usePostsReducer from '../hooks/usePostReducer';
+
+import EditPost from './EditPost';
 
 const EditPostPage = ({ postId, onEditPost, state, posts }) => {
   const navigate = useNavigate();
