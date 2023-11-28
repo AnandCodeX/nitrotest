@@ -1,11 +1,10 @@
 /** @format */
 
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 
 const useFetchPosts = () => {
 	const [posts, setPosts] = useState([]);
-
 	useEffect(() => {
 		axios
 			.get("http://localhost:3007/posts")

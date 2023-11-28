@@ -6,10 +6,6 @@ import EditPost from "./EditPost";
 const PostListItem = ({ post, onEditPost }) => {
 	const [isEditing, setIsEditing] = useState(false);
 
-	const handleEditToggle = () => {
-		setIsEditing(!isEditing);
-	};
-
 	const handleSaveChanges = (editedFields) => {
 		onEditPost(post.id, editedFields);
 		setIsEditing(false);
@@ -18,8 +14,16 @@ const PostListItem = ({ post, onEditPost }) => {
 	return (
 		<li>
 			<p>{post.text}</p>
-			<p>Author: {post.author}</p>
-			<p>Location: {post.location}</p>
+			<p>
+				{" "}
+				<span className="post-list-item-higlight">Author:</span>
+				 {post.author}
+			</p>
+			<p>
+				{" "}
+				<span className="post-list-item-higlight">Location:</span>
+				 {post.location}
+			</p>
 
 			{isEditing ? (
 				<EditPost
@@ -29,7 +33,8 @@ const PostListItem = ({ post, onEditPost }) => {
 					onCancel={() => setIsEditing(false)}
 				/>
 			) : (
-				<Link to={`/edit/${post.id}`}>Edit Post</Link>
+				<Link className=
+				"post-edit-button" to={`/edit/${post.id}`}>Edit Post</Link>
 			)}
 		</li>
 	);

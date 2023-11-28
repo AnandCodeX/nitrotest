@@ -1,85 +1,13 @@
-import React, { useEffect } from 'react';
-import { Link, Route, BrowserRouter as Router, Routes } from 'react-router-dom';
+/** @format */
 
-import EditPostContainer from './components/EditPostContainer';
-import PostList from './components/PostList';
-import useFetchPosts from './hooks/useFetchPost';
-import usePostsReducer from './hooks/usePostReducer';
+import React from "react";
+import Posts from "./Posts";
 
 const App = () => {
-  const posts = useFetchPosts();
-  const [state, dispatch] = usePostsReducer();
-console.log('sat')
-  useEffect(() => {
-    dispatch({ type: 'SET_POSTS', payload: posts });
-  }, [dispatch, posts]);
-
-  const formatWeek = (start, end) => {
-    const startDate = new Date(start * 1000).toLocaleDateString();
-    const endDate = new Date(end * 1000).toLocaleDateString();
-    return `${startDate} - ${endDate}`;
-  };
-
-  const groupPosts = () => {
-    const groupedPosts = {};
-    state.posts.forEach((post) => {
-      const groupKey =
-        state.groupingType === 'week'
-          ? formatWeek(post.time, post.time)
-          : post[state.groupingType];
-      if (!groupedPosts[groupKey]) {
-        groupedPosts[groupKey] = [];
-      }
-      groupedPosts[groupKey].push(post);
-    });
-    return groupedPosts;
-  };
-  const groupedPosts = groupPosts();
-
-  const handleGroupingTypeChange = (e) => {
-    dispatch({ type: 'SET_GROUPING_TYPE', payload: e.target.value });
-  };
-
-  const handleEditPost = (postId, editedFields) => {
-    dispatch({ type: 'EDIT_POST', payload: { id: postId, ...editedFields } });
-  };
-
-  return (
-    <Router>
-      <div>
-        <h1>
-          <Link to="/">Post Tree View</Link>
-        </h1>
-        <select value={state.groupingType} onChange={handleGroupingTypeChange}>
-          <option value="week">Group by Week</option>
-          <option value="author">Group by Author</option>
-          <option value="location">Group by Location</option>
-        </select>
-
-        <Routes>
-          <Route
-            path="/edit/:postId"
-            element={
-              <EditPostContainer
-                onEditPost={handleEditPost}
-                state={state}
-                posts={posts}
-              />
-            }
-          />
-          <Route
-            path="/"
-            element={
-              <PostList
-                groupedPosts={groupedPosts}
-                onEditPost={handleEditPost}
-              />
-            }
-          />
-        </Routes>
-      </div>
-    </Router>
-  );
+	return (
+		<>
+			<Posts />
+		</>
+	);
 };
-
 export default App;
